@@ -52,11 +52,11 @@ public class TypeText extends ToggleInteraction {
 	public ArrayList<String> generateEyeAutomateJavaLines(String starting_folder) {
 		ArrayList<String> res = new ArrayList<>();
 		
-		res.add("image = eye.loadImage(\"" + new String(starting_folder + "\\" + timestamp + "_cropped.png").replace("\\", "\\\\") + "\");");
+		res.add("image = eye.loadImage(\"" + new String(starting_folder + "\\JavaTranslatedProject\\" + timestamp + "_cropped.png").replace("\\", "\\\\") + "\");");
 		res.add("if (image != null) {");
 		res.add("\tmatch = eye.findImage(image);");
 		res.add("\tif (match == null) {");
-		res.add("\t\tSystem.out.println(\"Test failed - " + new String(starting_folder + "\\" + timestamp + "_cropped.png").replace("\\", "\\\\") + "\");");
+		res.add("\t\tSystem.out.println(\"Test failed - " + new String(starting_folder + "\\JavaTranslatedProject\\" + timestamp + "_cropped.png").replace("\\", "\\\\") + "\");");
 		res.add("\t\treturn \"fail;\"+interactions;");
 		res.add("\t}");
 		res.add("\teye.click(match.getCenterLocation());");
@@ -78,7 +78,7 @@ public class TypeText extends ToggleInteraction {
 		ArrayList<String> res = new ArrayList<>();
 		
 		res.add("try {");
-		res.add("\tsikuli_screen.click(\"" + new String(starting_folder + "\\" + timestamp + "_cropped.png").replace("\\", "\\\\") + "\");");
+		res.add("\tsikuli_screen.click(\"" + new String(starting_folder + "\\JavaTranslatedProject\\" + timestamp + "_cropped.png").replace("\\", "\\\\") + "\");");
 		res.add("\tsikuli_screen.type(\"" + text + "\");");
 		res.add("}");
 		res.add("catch (FindFailed ffe) {");
@@ -97,7 +97,7 @@ public class TypeText extends ToggleInteraction {
 		
 		ArrayList<String> res = new ArrayList<>();
 
-		res.add("image = eye.loadImage(\"" + new String(starting_folder + "\\" + timestamp + "_cropped.png").replace("\\", "\\\\") + "\");");
+		res.add("image = eye.loadImage(\"" + new String(starting_folder + "\\JavaTranslatedProject\\" + timestamp + "_cropped.png").replace("\\", "\\\\") + "\");");
 		res.add("if (image != null) {");
 		res.add("\tmatch = eye.findImage(image);");
 		
@@ -106,7 +106,7 @@ public class TypeText extends ToggleInteraction {
 		res.add("\tif (match == null) {");
 		res.add("\t\teyeautomate_failures++;");
 		res.add("\t\ttry {");
-		res.add("\t\t\tsikuli_screen.click(\"" + new String(starting_folder + "\\" + timestamp + "_cropped.png").replace("\\", "\\\\") + "\");");
+		res.add("\t\t\tsikuli_screen.click(\"" + new String(starting_folder + "\\JavaTranslatedProject\\" + timestamp + "_cropped.png").replace("\\", "\\\\") + "\");");
 		res.add("\t\t\tsikuli_screen.type(\"" + text + "\");");
 		res.add("\t\t}");
 		res.add("\t\tcatch (FindFailed ffe) {");
@@ -141,14 +141,14 @@ public class TypeText extends ToggleInteraction {
 
 		
 		res.add("try {");
-		res.add("\tsikuli_screen.click(\"" + new String(starting_folder + "\\" + timestamp + "_cropped.png").replace("\\", "\\\\") + "\");");
+		res.add("\tsikuli_screen.click(\"" + new String(starting_folder + "\\JavaTranslatedProject\\" + timestamp + "_cropped.png").replace("\\", "\\\\") + "\");");
 
 		res.add("\tsikuli_screen.type(\"" + text + "\");");
 
 		res.add("}");
 		res.add("catch (FindFailed ffe) {");
 		res.add("\tsikuli_failures++;");
-		res.add("\timage = eye.loadImage(\"" + new String(starting_folder + "\\" + timestamp + "_cropped.png").replace("\\", "\\\\") + "\");");
+		res.add("\timage = eye.loadImage(\"" + new String(starting_folder + "\\JavaTranslatedProject\\" + timestamp + "_cropped.png").replace("\\", "\\\\") + "\");");
 		res.add("\tif (image != null) {");
 		res.add("\t\tmatch = eye.findImage(image);"); 
 		res.add("\t\tif (match == null) {");		//test failed also with eyeautomate

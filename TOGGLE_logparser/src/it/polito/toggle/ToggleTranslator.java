@@ -33,16 +33,21 @@ public class ToggleTranslator {
 	private String package_name;
 	private String class_name;
 	private String test_name;
-
+	
+	private Integer avdHeight=0;
+	private Integer avdRes=0;
+	
 	private int screen_size_height = 0;
 	private int screen_size_width = 0;
 
-	public ToggleTranslator(String starting_folder, String package_name, String class_name, String test_name) {
+	public ToggleTranslator(String starting_folder, String package_name, String class_name, String test_name, Integer avdHeight, Integer avdRes) {
 
 		this.starting_folder = starting_folder;
 		this.package_name = package_name;
 		this.test_name = test_name;
 		this.class_name = class_name;
+		this.avdHeight=avdHeight;
+		this.avdRes=avdRes;
 
 	}
 
@@ -180,7 +185,6 @@ public class ToggleTranslator {
 
 		File imageFile = new File(starting_folder + "\\" + time + ".bmp");  //3001
 		File xmlFile = new File(starting_folder + "\\" + time + ".xml");
-
 
 		ToggleInteraction res;
 
@@ -477,7 +481,7 @@ public class ToggleTranslator {
 			//aggiungere campo booleano needs_cut_screenshot per gestire tutti questi casi
 			if (i.needScreenshot()) {
 
-				File cropped_screenshot_file = i.manageScreenshot(starting_folder);
+				File cropped_screenshot_file = i.manageScreenshot(starting_folder, avdHeight,avdRes);
 
 			}
 

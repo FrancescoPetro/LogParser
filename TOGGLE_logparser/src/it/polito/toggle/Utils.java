@@ -1,12 +1,18 @@
 package it.polito.toggle;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.util.Scanner;
 
 public class Utils {
 	
@@ -75,8 +81,46 @@ public class Utils {
 		
 	}
 	
+	public static void copyImages(File startingDir) {
+		
+		File[] list = startingDir.listFiles();
+		if(list!=null)
+			for (File fil : list)
+			{
+				if (fil.getName().contains(".bmp"))
+				{
+
+				try {
+					Files.copy(Paths.get(fil.getPath()), Paths.get(startingDir.getPath()+"\\JavaTranslatedProject\\"+fil.getName()),StandardCopyOption.REPLACE_EXISTING);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}	
+					
+
+				}
+				
+			}
+		
+	}
 	
-	public static void createJavaProjectFolder(String starting_folder) throws IOException {
+	private static void copyLib(String libSourcePath, String libDestPath) {
+		
+		//String libDestPath=starting_folder + "\\JavaTranslatedProject\\libs";
+		
+		try {
+			Files.copy(Paths.get(libSourcePath+"\\eye2.jar"), Paths.get(libDestPath+"\\eye2.jar"), StandardCopyOption.REPLACE_EXISTING);
+			Files.copy(Paths.get(libSourcePath+"\\EyeAutomate.jar"), Paths.get(libDestPath+"\\EyeAutomate.jar"), StandardCopyOption.REPLACE_EXISTING);
+			Files.copy(Paths.get(libSourcePath+"\\sikulixapi.jar"), Paths.get(libDestPath+"\\sikulixapi.jar"), StandardCopyOption.REPLACE_EXISTING);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+	}
+	
+	public static void createJavaProjectFolder(String starting_folder,String libSourcePath) throws IOException {
 		
 		//TODO aggiungere download delle librerie all'interno della cartella libs
 		//TODO caricare le librerie sul server (ora come ora bisogna copiarle a manina)
@@ -90,6 +134,7 @@ public class Utils {
 		dir = new File(starting_folder + "\\JavaTranslatedProject\\libs");
 		dir.mkdirs();
 		
+		copyLib(libSourcePath,dir.getPath());
 		
 		File fout_project = new File(starting_folder + "\\JavaTranslatedProject\\.project");
 		FileOutputStream fos = new FileOutputStream(fout_project);

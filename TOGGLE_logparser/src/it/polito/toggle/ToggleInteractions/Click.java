@@ -55,11 +55,11 @@ public class Click extends ToggleInteraction {
 		
 		ArrayList<String> res = new ArrayList<>();
 		
-		res.add("image = eye.loadImage(\"" + new String(starting_folder + "\\" + timestamp + "_cropped.png").replace("\\", "\\\\") + "\");");
+		res.add("image = eye.loadImage(\"" + new String(starting_folder + "\\JavaTranslatedProject\\" + timestamp + "_cropped.png").replace("\\", "\\\\") + "\");");
 		res.add("if (image != null) {");
 		res.add("\tmatch = eye.findImage(image);");
 		res.add("\tif (match == null) {");
-		res.add("\t\tSystem.out.println(\"Test failed - " + new String(starting_folder + "\\" + timestamp + "_cropped.png").replace("\\", "\\\\") + "\");");
+		res.add("\t\tSystem.out.println(\"Test failed - " + new String(starting_folder + "\\JavaTranslatedProject\\" + timestamp + "_cropped.png").replace("\\", "\\\\") + "\");");
 		res.add("\t\treturn \"fail;\"+interactions;");
 		res.add("\t}");
 		res.add("\teye.click(match.getCenterLocation());");
@@ -80,7 +80,7 @@ public class Click extends ToggleInteraction {
 		ArrayList<String> res = new ArrayList<>();
 		
 		res.add("try {");
-		res.add("\tsikuli_screen.click(\"" + new String(starting_folder + "\\" + timestamp + "_cropped.png").replace("\\", "\\\\") + "\");");
+		res.add("\tsikuli_screen.click(\"" + new String(starting_folder + "\\JavaTranslatedProject\\" + timestamp + "_cropped.png").replace("\\", "\\\\") + "\");");
 		res.add("}");
 		res.add("catch (FindFailed ffe) {");
 		res.add("\tffe.printStackTrace();");
@@ -98,7 +98,7 @@ public class Click extends ToggleInteraction {
 		ArrayList<String> res = new ArrayList<>();
 
 		
-		res.add("image = eye.loadImage(\"" + new String(starting_folder + "\\" + timestamp + "_cropped.png").replace("\\", "\\\\") + "\");");
+		res.add("image = eye.loadImage(\"" + new String(starting_folder + "\\JavaTranslatedProject\\" + timestamp + "_cropped.png").replace("\\", "\\\\") + "\");");
 		res.add("if (image != null) {");
 		res.add("\tmatch = eye.findImage(image);");
 		res.add("\tif (match == null) {");
@@ -106,7 +106,7 @@ public class Click extends ToggleInteraction {
 		//sikuli alternative
 		res.add("\t\teyeautomate_failures++;");
 		res.add("\t\ttry {");
-		res.add("\t\t\tsikuli_screen.click(\"" + new String(starting_folder + "\\" + timestamp + "_cropped.png").replace("\\", "\\\\") + "\");");
+		res.add("\t\t\tsikuli_screen.click(\"" + new String(starting_folder + "\\JavaTranslatedProject\\" + timestamp + "_cropped.png").replace("\\", "\\\\") + "\");");
 		res.add("\t\t}");
 		res.add("\t\tcatch (FindFailed ffe) {");
 		res.add("\t\t\tffe.printStackTrace();");
@@ -134,11 +134,11 @@ public class Click extends ToggleInteraction {
 		ArrayList<String> res = new ArrayList<String>();
 		
 		res.add("try {");
-		res.add("\tsikuli_screen.click(\"" + new String(starting_folder + "\\" + timestamp + "_cropped.png").replace("\\", "\\\\") + "\");");
+		res.add("\tsikuli_screen.click(\"" + new String(starting_folder + "\\JavaTranslatedProject\\" + timestamp + "_cropped.png").replace("\\", "\\\\") + "\");");
 		res.add("}");
 		res.add("catch (FindFailed ffe) {");
 		res.add("\tsikuli_failures++;");
-		res.add("\timage = eye.loadImage(\"" + new String(starting_folder + "\\" + timestamp + "_cropped.png").replace("\\", "\\\\") + "\");");
+		res.add("\timage = eye.loadImage(\"" + new String(starting_folder + "\\JavaTranslatedProject\\" + timestamp + "_cropped.png").replace("\\", "\\\\") + "\");");
 		res.add("\tif (image != null) {");
 		res.add("\t\tmatch = eye.findImage(image);"); 
 		res.add("\t\tif (match == null) {");		//test failed also with eyeautomate

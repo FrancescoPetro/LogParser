@@ -104,15 +104,15 @@ public class Main {
 		//ToggleClassManager tcm = new ToggleClassManager("TestPassCreation", "org.ligi.passandroid", "C:\\Users\\Riccardo Coppola\\Desktop\\touchtest", tests);
 
 		
-		tests.add("testTextNoteIsDisplayed");
-		tests.add("testChecklistIsDisplayed");
-		tests.add("testCameraIsDisplayed");
-		tests.add("testReducedViewMenu");
-		tests.add("testLeftMenuContent");
-		tests.add("testOrderByMenu");
-		tests.add("testSearchButtons");
+		//tests.add("testTextNoteIsDisplayed");
+		//tests.add("testChecklistIsDisplayed");
+		//tests.add("testCameraIsDisplayed");
+		//tests.add("testReducedViewMenu");
+		//tests.add("testLeftMenuContent");
+		//tests.add("testOrderByMenu");
+		//tests.add("testSearchButtons");
 
-		ToggleClassManager tcm = new ToggleClassManager("TestHome", "it.feio.android.omninotes.alpha", "C:\\Users\\Francesco\\Desktop\\touchtest", tests);
+		//ToggleClassManager tcm = new ToggleClassManager("TestHome", "it.feio.android.omninotes.alpha", "C:\\Users\\Francesco\\Desktop\\touchtest", tests);
 
 		//tests.add("testDeleteNote");
 		//tests.add("testRestoreFromTrash");
@@ -145,11 +145,11 @@ public class Main {
 		//ToggleClassManager tcm = new ToggleClassManager("TestSettings", "it.feio.android.omninotes.alpha", "C:\\Users\\Riccardo Coppola\\Desktop\\touchtest", tests);
 
 		
-		ArrayList<String> result_class = tcm.createClass();
+		/*ArrayList<String> result_class = tcm.createClass();
 		
 		for (String s: result_class) {
 			System.out.println(s);
-		}
+		}*/
 		
 		
 		

@@ -63,11 +63,11 @@ public class DoubleClick extends ToggleInteraction {
 		
 		ArrayList<String> res = new ArrayList<>();
 		
-		res.add("image = eye.loadImage(\"" + new String(starting_folder + "\\" + timestamp + "_cropped.png").replace("\\", "\\\\") + "\");");
+		res.add("image = eye.loadImage(\"" + new String(starting_folder + "\\JavaTranslatedProject\\" + timestamp + "_cropped.png").replace("\\", "\\\\") + "\");");
 		res.add("if (image != null) {");
 		res.add("\tmatch = eye.findImage(image);");
 		res.add("\tif (match == null) {");
-		res.add("\t\tSystem.out.println(\"Test failed - " + new String(starting_folder + "\\" + timestamp + "_cropped.png").replace("\\", "\\\\") + "\");");
+		res.add("\t\tSystem.out.println(\"Test failed - " + new String(starting_folder + "\\JavaTranslatedProject\\" + timestamp + "_cropped.png").replace("\\", "\\\\") + "\");");
 		res.add("\t\treturn \"fail;\"+interactions;");
 		res.add("\t}");
 		res.add("\teye.doubleClick(match.getCenterLocation());");
@@ -87,7 +87,7 @@ public class DoubleClick extends ToggleInteraction {
 		ArrayList<String> res = new ArrayList<>();
 
 		res.add("try {");
-		res.add("\tsikuli_screen.mouseMove(\"" + new String(starting_folder + "\\" + timestamp + "_cropped.png").replace("\\", "\\\\") + "\");");
+		res.add("\tsikuli_screen.mouseMove(\"" + new String(starting_folder + "\\JavaTranslatedProject\\" + timestamp + "_cropped.png").replace("\\", "\\\\") + "\");");
 		res.add("\tsikuli_screen.mouseDown(Button.LEFT);");
 		res.add("\tsleep(0.001);");
 		res.add("\tsikuli_screen.mouseUp(Button.LEFT);");
@@ -109,7 +109,7 @@ public class DoubleClick extends ToggleInteraction {
 
 		ArrayList<String> res = new ArrayList<>();
 
-		res.add("image = eye.loadImage(\"" + new String(starting_folder + "\\" + timestamp + "_cropped.png").replace("\\", "\\\\") + "\");");
+		res.add("image = eye.loadImage(\"" + new String(starting_folder + "\\JavaTranslatedProject\\" + timestamp + "_cropped.png").replace("\\", "\\\\") + "\");");
 		res.add("if (image != null) {");
 		res.add("\tmatch = eye.findImage(image);");
 		
@@ -118,7 +118,7 @@ public class DoubleClick extends ToggleInteraction {
 		res.add("\t\teyeautomate_failures++;");
 
 		res.add("\t\ttry {");
-		res.add("\t\t\tsikuli_screen.mouseMove(\"" + new String(starting_folder + "\\" + timestamp + "_cropped.png").replace("\\", "\\\\") + "\");");
+		res.add("\t\t\tsikuli_screen.mouseMove(\"" + new String(starting_folder + "\\JavaTranslatedProject\\" + timestamp + "_cropped.png").replace("\\", "\\\\") + "\");");
 		res.add("\t\t\tsikuli_screen.mouseDown(Button.LEFT);");
 		res.add("\t\t\tsleep(0.001);");
 		res.add("\t\t\tsikuli_screen.mouseUp(Button.LEFT);");
@@ -157,7 +157,7 @@ public class DoubleClick extends ToggleInteraction {
 		
 		
 		res.add("try {");
-		res.add("\tsikuli_screen.mouseMove(\"" + new String(starting_folder + "\\" + timestamp + "_cropped.png").replace("\\", "\\\\") + "\");");
+		res.add("\tsikuli_screen.mouseMove(\"" + new String(starting_folder + "\\JavaTranslatedProject\\" + timestamp + "_cropped.png").replace("\\", "\\\\") + "\");");
 		res.add("\tsikuli_screen.mouseDown(Button.LEFT);");
 		res.add("\tsleep(0.001);");
 		res.add("\tsikuli_screen.mouseUp(Button.LEFT);");
@@ -167,7 +167,7 @@ public class DoubleClick extends ToggleInteraction {
 		res.add("}");
 		res.add("catch (FindFailed ffe) {");
 		res.add("\tsikuli_failures++;");
-		res.add("\timage = eye.loadImage(\"" + new String(starting_folder + "\\" + timestamp + "_cropped.png").replace("\\", "\\\\") + "\");");
+		res.add("\timage = eye.loadImage(\"" + new String(starting_folder + "\\JavaTranslatedProject\\" + timestamp + "_cropped.png").replace("\\", "\\\\") + "\");");
 		res.add("\tif (image != null) {");
 		res.add("\t\tmatch = eye.findImage(image);"); 
 		res.add("\t\tif (match == null) {");		//test failed also with eyeautomate

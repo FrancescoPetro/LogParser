@@ -232,7 +232,6 @@ public abstract class ToggleInteraction {
 		}
 		else if (search_type.equals("text")) {
 			expr = xpath.compile("//node[@text=\"" + search_keyword + "\"]");
-			//TODO vedere come si comporta se il testo è preso da string resources 
 		}
 		else if (search_type.equals("content-desc")) {
 			expr = xpath.compile("//node[@content-desc=\"" + search_keyword + "\"]");
@@ -258,11 +257,11 @@ public abstract class ToggleInteraction {
 	
 	
 	
-	public File manageScreenshot(String starting_folder) throws IOException {
+	public File manageScreenshot(String starting_folder, Integer avdHeight, Integer avdRes) throws IOException {
 		
 		
 		cropped_image = ImageManipulationTools.cutImage(screen_capture, left, top, right, bottom);
-		cropped_screenshot_file = ImageManipulationTools.saveCroppedScreenshotToFile(starting_folder, timestamp, ImageManipulationTools.resizeScreenshot(cropped_image,1080,369));
+		cropped_screenshot_file = ImageManipulationTools.saveCroppedScreenshotToFile(starting_folder, timestamp, ImageManipulationTools.resizeScreenshot(cropped_image,avdHeight,avdRes));
 		return cropped_screenshot_file;
 		
 	}
