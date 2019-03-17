@@ -399,8 +399,17 @@ public class ToggleClassManager {
 			interactions = new ArrayList<ToggleInteraction>();
 
 			for (String s:filtered_logcat_interactions) {
+				ToggleInteraction interaction=null;
+				try {
+					interaction= tt.readInteractionsFromLogcat(s);
+				}
+				catch(Exception e){
+					
+					System.out.println("EXCEPTION! "+e.getMessage());
+					
+					interaction= tt.readInteractionsFromLogcat(s);
+				}
 
-				ToggleInteraction interaction = tt.readInteractionsFromLogcat(s);
 				interactions.add(interaction);
 				method_interactions++;
 
@@ -408,7 +417,22 @@ public class ToggleClassManager {
 
 
 			//never comment
-			tt.saveCroppedScreenshots(interactions);
+			try {
+				tt.saveCroppedScreenshots(interactions);
+			}
+			catch(Exception e) {
+				
+				System.out.println("EXCEPTION! "+e.getMessage());
+				
+				for (String s:filtered_logcat_interactions) {
+					ToggleInteraction interaction= tt.readInteractionsFromLogcat(s);
+
+					interactions.add(interaction);
+					method_interactions++;
+
+				}
+				tt.saveCroppedScreenshots(interactions);
+			}
 
 			for(String s:settings) {
 				if(s=="eye")
@@ -417,7 +441,8 @@ public class ToggleClassManager {
 					tt.createSikuliScript(interactions);
 			}
 
-
+			//tt.createEyeStudioScript(interactions);
+			//tt.createSikuliScript(interactions);
 
 			for (String method_line: tt.createEyeAutomateJavaMethod(interactions)) {
 				eyeautomate_only.add(method_line);
@@ -475,11 +500,50 @@ public class ToggleClassManager {
 		sikuli_eyeautomate.add("}");
 
 
+
+		FileOutputStream fos;
+		BufferedWriter bw;
+
+		/*File foutjava_eyeautomate = new File(starting_folder + "\\JavaTranslatedProject\\src\\" + class_name + "EyeAutomate.java");
+		fos = new FileOutputStream(foutjava_eyeautomate);
+		bw = new BufferedWriter(new OutputStreamWriter(fos));
+		for (String s:eyeautomate_only) {
+			bw.write(s);
+			bw.newLine();
+		}
+		bw.close();
+
+		File foutjava_sikuli = new File(starting_folder + "\\JavaTranslatedProject\\src\\" + class_name + "Sikuli.java");
+		fos = new FileOutputStream(foutjava_sikuli);
+		bw = new BufferedWriter(new OutputStreamWriter(fos));
+		for (String s:sikuli_only) {
+			bw.write(s);
+			bw.newLine();
+		}
+		bw.close();
+
+		File foutjava_eyeautomate_sikuli = new File(starting_folder + "\\JavaTranslatedProject\\src\\" + class_name + "EyeAutomateSikuli.java");
+		fos = new FileOutputStream(foutjava_eyeautomate_sikuli);
+		bw = new BufferedWriter(new OutputStreamWriter(fos));
+		for (String s:eyeautomate_sikuli) {
+			bw.write(s);
+			bw.newLine();
+		}
+		bw.close();
+
+		File foutjava_sikuli_eyeautomate = new File(starting_folder + "\\JavaTranslatedProject\\src\\" + class_name + "SikuliEyeAutomate.java");
+		fos = new FileOutputStream(foutjava_sikuli_eyeautomate);
+		bw = new BufferedWriter(new OutputStreamWriter(fos));
+		for (String s:sikuli_eyeautomate) {
+			bw.write(s);
+			bw.newLine();
+		}
+		bw.close();*/
+
 		for(String setting:settings) {
-			FileOutputStream fos;
-			BufferedWriter bw;
-			
 			if(setting=="javaEyeAutomate") {
+
+				System.out.println("SETTING: "+setting);
 
 				File foutjava_eyeautomate = new File(starting_folder + "\\JavaTranslatedProject\\src\\" + class_name + "EyeAutomate.java");
 				fos = new FileOutputStream(foutjava_eyeautomate);
@@ -493,6 +557,8 @@ public class ToggleClassManager {
 			}
 
 			if(setting=="javaSikuli") {
+				System.out.println("SETTING: "+setting);
+
 				File foutjava_sikuli = new File(starting_folder + "\\JavaTranslatedProject\\src\\" + class_name + "Sikuli.java");
 				fos = new FileOutputStream(foutjava_sikuli);
 				bw = new BufferedWriter(new OutputStreamWriter(fos));
@@ -504,6 +570,8 @@ public class ToggleClassManager {
 			}
 
 			if(setting=="eyeSikuli") {
+				System.out.println("SETTING: "+setting);
+
 				File foutjava_eyeautomate_sikuli = new File(starting_folder + "\\JavaTranslatedProject\\src\\" + class_name + "EyeAutomateSikuli.java");
 				fos = new FileOutputStream(foutjava_eyeautomate_sikuli);
 				bw = new BufferedWriter(new OutputStreamWriter(fos));
@@ -515,6 +583,8 @@ public class ToggleClassManager {
 			}
 
 			if(setting=="sikuliEye") {
+				System.out.println("SETTING: "+setting);
+
 				File foutjava_sikuli_eyeautomate = new File(starting_folder + "\\JavaTranslatedProject\\src\\" + class_name + "SikuliEyeAutomate.java");
 				fos = new FileOutputStream(foutjava_sikuli_eyeautomate);
 				bw = new BufferedWriter(new OutputStreamWriter(fos));

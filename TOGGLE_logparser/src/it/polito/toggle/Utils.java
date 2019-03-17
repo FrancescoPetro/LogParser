@@ -48,7 +48,7 @@ public class Utils {
 	
 	public static void copyFile(File source, File dest) throws IOException {
 		
-		Files.copy(source.toPath(), dest.toPath());
+		Files.copy(source.toPath(), dest.toPath(),StandardCopyOption.REPLACE_EXISTING);
 		
 	}
 	
@@ -87,7 +87,7 @@ public class Utils {
 		if(list!=null)
 			for (File fil : list)
 			{
-				if (fil.getName().contains(".bmp"))
+				if (fil.getName().contains(".png"))
 				{
 
 				try {
@@ -132,6 +132,9 @@ public class Utils {
 		dir.mkdirs();
 		
 		dir = new File(starting_folder + "\\JavaTranslatedProject\\libs");
+		dir.mkdirs();
+		
+		dir = new File(starting_folder + "\\JavaTranslatedProject\\bin");
 		dir.mkdirs();
 		
 		copyLib(libSourcePath,dir.getPath());

@@ -19,6 +19,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javax.imageio.ImageIO;
 import javax.xml.parsers.ParserConfigurationException;
@@ -33,10 +34,10 @@ public class ToggleTranslator {
 	private String package_name;
 	private String class_name;
 	private String test_name;
-	
+
 	private Integer avdHeight=0;
 	private Integer avdRes=0;
-	
+
 	private int screen_size_height = 0;
 	private int screen_size_width = 0;
 
@@ -121,11 +122,28 @@ public class ToggleTranslator {
 
 
 	public final List<String> filterLogcat(String filename, String filter) throws IOException {
-		return Files
-				.lines(Paths.get(starting_folder, filename), StandardCharsets.ISO_8859_1)
-				.filter(line -> line.contains(filter))
+
+		/*Stream<String> lines=Files.lines(Paths.get(starting_folder, filename), StandardCharsets.ISO_8859_1);
+
+		List<String> filteredList=lines.filter(line -> line.contains(filter))
 				.filter(line -> line.contains(test_name)) // alternativa = ricerca per campo esatto field[1].equals(test_name)
 				.collect(Collectors.toList());
+
+		lines.close();
+
+		return filteredList;*/
+
+		/*return Files.lines(Paths.get(starting_folder, filename), StandardCharsets.ISO_8859_1)
+				.filter(line -> line.contains(filter))
+				.filter(line -> line.contains(test_name)) // alternativa = ricerca per campo esatto field[1].equals(test_name)
+				.collect(Collectors.toList());*/
+		
+		try(Stream<String> lines=Files.lines(Paths.get(starting_folder, filename), StandardCharsets.ISO_8859_1)){
+			return lines.filter(line -> line.contains(filter))
+					.filter(line -> line.contains(test_name)) // alternativa = ricerca per campo esatto field[1].equals(test_name)
+					.collect(Collectors.toList());
+		}
+
 	}
 
 

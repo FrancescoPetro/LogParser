@@ -242,9 +242,11 @@ public abstract class ToggleInteraction {
 		if (nl != null) 
 			for (int i=0; i<nl.getLength(); i++) 
 				bounds = (nl.item(i).getAttributes().getNamedItem("bounds").toString());
-			
+
+		System.out.println("Bounds: "+bounds);
+		
 		String[] splitted_string = bounds.split("(\\[)|(\\])|((,))");
-						
+		
 		left = Integer.valueOf(splitted_string[1]);
 		top = Integer.valueOf(splitted_string[2]);
 		
