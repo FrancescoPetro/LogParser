@@ -131,10 +131,10 @@ public class Utils {
 		dir = new File(starting_folder + "\\JavaTranslatedProject\\src");
 		dir.mkdirs();
 		
-		dir = new File(starting_folder + "\\JavaTranslatedProject\\libs");
-		dir.mkdirs();
-		
 		dir = new File(starting_folder + "\\JavaTranslatedProject\\bin");
+		dir.mkdirs();
+
+		dir = new File(starting_folder + "\\JavaTranslatedProject\\libs");
 		dir.mkdirs();
 		
 		copyLib(libSourcePath,dir.getPath());

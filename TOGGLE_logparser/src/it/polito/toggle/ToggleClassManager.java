@@ -1,9 +1,11 @@
 package it.polito.toggle;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +22,8 @@ public class ToggleClassManager {
 	private static List<ToggleInteraction> interactions = new ArrayList<>();
 	private static final String logcat_tool_tag = "touchtest";
 
-
+	private static String adbPath;
+	private static String main_activity_name;
 	private String class_name;
 	private String package_name;
 	private String starting_folder;
@@ -101,6 +104,8 @@ public class ToggleClassManager {
 		res.add("import eye.Eye.RecognitionMode;");
 		res.add("import eye.Match;");
 		res.add("import eyeautomate.*;");
+		res.add("import java.io.BufferedReader;");
+		res.add("import java.io.InputStreamReader;");
 
 		return res;
 	}
@@ -110,7 +115,7 @@ public class ToggleClassManager {
 	private ArrayList<String> createEyeAutomateOrSikuliJavaMain() {
 
 		ArrayList<String> res = new ArrayList<String>();
-		res.add("public static void main(String[] args) throws InterruptedException {");
+		res.add("public static void main(String[] args) throws InterruptedException, IOException {");
 		res.add("\n");
 		res.add("\tint tests_ok = 0;");
 		res.add("\tint tests_failed = 0;");
@@ -122,6 +127,9 @@ public class ToggleClassManager {
 		res.add("\tString curr_test_res = \"\";");
 		res.add("\tint curr_test_interactions = 0;");
 
+		res.add("\tclearApp(\""+package_name+"\");");
+		res.add("\tThread.sleep(4000);");
+		
 		for (String test: testNames) {
 
 			res.add("\tSystem.out.println(\"Starting test + " + test + "\");");
@@ -154,8 +162,10 @@ public class ToggleClassManager {
 			res.add("\texecutionTime = endTime - startTime;");
 			res.add("\tSystem.out.println(\"Execution time: \" + executionTime);");
 			res.add("\tSystem.out.println(\"" + package_name + ";" + class_name + ";" + test + ";\" + curr_test_res +\";\" + executionTime + \";\" +  curr_test_interactions);");
-			res.add("\tThread.sleep(2000);");
-
+			
+			res.add("\tclearApp(\""+package_name+"\");");
+			res.add("\tThread.sleep(4000);");
+			
 			res.add("\n\n");
 
 		}
@@ -165,6 +175,21 @@ public class ToggleClassManager {
 
 
 		res.add("\treturn;");
+		res.add("}");
+		
+		res.add("\tpublic static void clearApp(String targetPackage) throws InterruptedException,IOException {");
+		res.add("\tProcessBuilder builder = new ProcessBuilder(\"cmd.exe\", \"/c\", \"adb shell pm clear \" + targetPackage);");
+		res.add("\tbuilder.redirectErrorStream(true);");
+		res.add("\tbuilder.directory(new File(\""+adbPath.replace("\\", "\\\\")+"\"));");
+		res.add("\tProcess p = builder.start();");
+		res.add("\tBufferedReader r = new BufferedReader(new InputStreamReader(p.getInputStream()));");
+		
+		res.add("\tThread.sleep(500);");
+		res.add("\tbuilder = new ProcessBuilder(\"cmd.exe\", \"/c\", \"adb shell am start -n \" + targetPackage + \"/"+main_activity_name+"\");");
+		res.add("\tbuilder.redirectErrorStream(true);");
+		res.add("\tp = builder.start();");
+		res.add("\tr = new BufferedReader(new InputStreamReader(p.getInputStream()));");
+		
 		res.add("}");
 
 		return res;
@@ -179,7 +204,7 @@ public class ToggleClassManager {
 
 
 
-		res.add("public static void main(String[] args) throws InterruptedException {");
+		res.add("public static void main(String[] args) throws InterruptedException,IOException {");
 		res.add("\n");
 		res.add("\tint tests_ok = 0;");
 		res.add("\tint tests_failed = 0;");
@@ -196,6 +221,8 @@ public class ToggleClassManager {
 
 		res.add("\tint curr_test_eyeautomate_failures = 0;");
 
+		res.add("\tclearApp(\""+package_name+"\");");
+		res.add("\tThread.sleep(4000);");
 
 		for (String test: testNames) {
 
@@ -231,7 +258,8 @@ public class ToggleClassManager {
 
 
 			res.add("\tSystem.out.println(\"" + package_name + ";" + class_name + ";" + test + ";\" + curr_test_res +\";\" + executionTime + \";\" +  curr_test_interactions + \";\" + curr_test_eyeautomate_failures);");
-			res.add("\tThread.sleep(2000);");
+			res.add("\tclearApp(\""+package_name+"\");");
+			res.add("\tThread.sleep(4000);");
 			res.add("\n\n");
 
 		}
@@ -244,6 +272,20 @@ public class ToggleClassManager {
 
 		res.add("\treturn;");
 		res.add("}");
+		
+		res.add("\tpublic static void clearApp(String targetPackage) throws InterruptedException,IOException {");
+		res.add("\tProcessBuilder builder = new ProcessBuilder(\"cmd.exe\", \"/c\", \"adb shell pm clear \" + targetPackage);");
+		res.add("\tbuilder.redirectErrorStream(true);");
+		res.add("\tbuilder.directory(new File(\""+adbPath.replace("\\", "\\\\")+"\"));");
+		res.add("\tProcess p = builder.start();");
+		res.add("\tBufferedReader r = new BufferedReader(new InputStreamReader(p.getInputStream()));");
+		
+		res.add("\tThread.sleep(500);");
+		res.add("\tbuilder = new ProcessBuilder(\"cmd.exe\", \"/c\", \"adb shell am start -n \" + targetPackage + \"/"+main_activity_name+"\");");
+		res.add("\tbuilder.redirectErrorStream(true);");
+		res.add("\tp = builder.start();");
+		res.add("\tr = new BufferedReader(new InputStreamReader(p.getInputStream()));");
+		res.add("}");
 
 		return res;
 
@@ -255,7 +297,7 @@ public class ToggleClassManager {
 
 		ArrayList<String> res = new ArrayList<String>();		
 
-		res.add("public static void main(String[] args) throws InterruptedException {");
+		res.add("public static void main(String[] args) throws InterruptedException, IOException {");
 		res.add("\n");
 		res.add("\tint tests_ok = 0;");
 		res.add("\tint tests_failed = 0;");
@@ -271,7 +313,9 @@ public class ToggleClassManager {
 
 		res.add("\tint curr_test_sikuli_failures = 0;");
 
-
+		res.add("\tclearApp(\""+package_name+"\");");
+		res.add("\tThread.sleep(4000);");
+		
 		for (String test: testNames) {
 
 			res.add("\tstartTime = System.currentTimeMillis();");
@@ -306,8 +350,10 @@ public class ToggleClassManager {
 
 
 			res.add("\n\n");
-			res.add("\tThread.sleep(2000);");
 			res.add("\tSystem.out.println(\"" + package_name + ";" + class_name + ";" + test + ";\" + curr_test_res +\";\" + executionTime + \";\" +  curr_test_interactions + \";\" + curr_test_sikuli_failures);");
+			res.add("\tclearApp(\""+package_name+"\");");
+			res.add("\tThread.sleep(4000);");
+			
 			res.add("\n\n");
 
 		}
@@ -320,7 +366,21 @@ public class ToggleClassManager {
 
 		res.add("\treturn;");
 		res.add("}");
-
+		
+		res.add("public static void clearApp(String targetPackage) throws InterruptedException,IOException {");
+		res.add("\tProcessBuilder builder = new ProcessBuilder(\"cmd.exe\", \"/c\", \"adb shell pm clear \" + targetPackage);");
+		res.add("\tbuilder.redirectErrorStream(true);");
+		res.add("\tbuilder.directory(new File(\""+adbPath.replace("\\", "\\\\")+"\"));");
+		res.add("\tProcess p = builder.start();");
+		res.add("\tBufferedReader r = new BufferedReader(new InputStreamReader(p.getInputStream()));");
+		
+		res.add("\tThread.sleep(500);");
+		res.add("\tbuilder = new ProcessBuilder(\"cmd.exe\", \"/c\", \"adb shell am start -n \" + targetPackage + \"/"+main_activity_name+"\");");
+		res.add("\tbuilder.redirectErrorStream(true);");
+		res.add("\tp = builder.start();");
+		res.add("\tr = new BufferedReader(new InputStreamReader(p.getInputStream()));");
+		res.add("}");
+		
 		return res;
 
 
@@ -604,4 +664,12 @@ public class ToggleClassManager {
 		return test_class_code;
 	}
 
+	public static void setAdbPath(String adbp) {
+		adbPath=adbp;
+	}
+	
+	public static void setMainActivity(String maina) {
+		main_activity_name=maina;
+	}
+	
 }
