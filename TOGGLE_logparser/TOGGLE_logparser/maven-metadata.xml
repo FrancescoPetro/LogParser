@@ -4,8 +4,8 @@
   <artifactId>TOGGLE_logparser</artifactId>
   <versioning>
     <versions>
-      <version>0.0.3-SNAPSHOT</version>
+      <version>0.1.1-SNAPSHOT</version>
     </versions>
-    <lastUpdated>20190326142246</lastUpdated>
+    <lastUpdated>20190326173758</lastUpdated>
   </versioning>
 </metadata>
