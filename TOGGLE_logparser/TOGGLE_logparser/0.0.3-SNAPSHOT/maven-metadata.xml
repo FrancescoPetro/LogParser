@@ -2,23 +2,23 @@
 <metadata modelVersion="1.1.0">
   <groupId>TOGGLE_logparser</groupId>
   <artifactId>TOGGLE_logparser</artifactId>
-  <version>0.0.2-SNAPSHOT</version>
+  <version>0.0.3-SNAPSHOT</version>
   <versioning>
     <snapshot>
-      <timestamp>20190320.102135</timestamp>
+      <timestamp>20190326.142246</timestamp>
       <buildNumber>1</buildNumber>
     </snapshot>
-    <lastUpdated>20190320102135</lastUpdated>
+    <lastUpdated>20190326142246</lastUpdated>
     <snapshotVersions>
       <snapshotVersion>
         <extension>jar</extension>
-        <value>0.0.2-20190320.102135-1</value>
-        <updated>20190320102135</updated>
+        <value>0.0.3-20190326.142246-1</value>
+        <updated>20190326142246</updated>
       </snapshotVersion>
       <snapshotVersion>
         <extension>pom</extension>
-        <value>0.0.2-20190320.102135-1</value>
-        <updated>20190320102135</updated>
+        <value>0.0.3-20190326.142246-1</value>
+        <updated>20190326142246</updated>
       </snapshotVersion>
     </snapshotVersions>
   </versioning>
