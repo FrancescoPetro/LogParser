@@ -45,6 +45,8 @@ public class ToggleClassManager {
 		this.avdHeight=avdHeight;
 		this.avdRes=avdRes;
 		this.settings=settings;
+		System.out.println("TOGGLE CLASS MANAGER");
+
 	}
 
 	public String getClass_name() {
@@ -397,6 +399,8 @@ public class ToggleClassManager {
 		//2) si crea una classe Main.java, la classe main contiene un metodo per ogni test + nel main lancia tutti i test e fa girare statistiche su quanti hanno ritornato true e quanti null
 
 
+		System.out.println("CREATE CLASS");
+		
 		int method_interactions = 0;
 
 		ArrayList<String> test_class_code = new ArrayList<String>();
@@ -438,6 +442,9 @@ public class ToggleClassManager {
 
 
 		//add the methods
+		
+		System.out.println("Test names size: "+testNames.size());
+		
 		for (String test_name: testNames) {
 
 			method_interactions = 0;
