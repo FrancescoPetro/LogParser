@@ -4,10 +4,13 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -108,17 +111,23 @@ public class ToggleClassManager {
 		res.add("import eyeautomate.*;");
 		res.add("import java.io.BufferedReader;");
 		res.add("import java.io.InputStreamReader;");
+		res.add("import java.io.FileWriter;");
+		res.add("import java.text.SimpleDateFormat;");
+		res.add("import java.util.Date;");
 
 		return res;
 	}
 
 
 
-	private ArrayList<String> createEyeAutomateOrSikuliJavaMain() {
+	private ArrayList<String> createEyeAutomateOrSikuliJavaMain(String eyeOrSikuli) {
 
 		ArrayList<String> res = new ArrayList<String>();
 		res.add("public static void main(String[] args) throws InterruptedException, IOException {");
 		res.add("\n");
+		
+		res.add("\tSimpleDateFormat sdf = new SimpleDateFormat(\"yyyy:MM:dd:HH:mm:ss.SSS\");");
+		
 		res.add("\tint tests_ok = 0;");
 		res.add("\tint tests_failed = 0;");
 
@@ -131,9 +140,9 @@ public class ToggleClassManager {
 
 		res.add("\tclearApp(\""+package_name+"\");");
 		res.add("\tThread.sleep(4000);");
-		
+		res.add("\tFileWriter fw = new FileWriter(\"results.csv\",true);");
 		for (String test: testNames) {
-
+			
 			res.add("\tSystem.out.println(\"Starting test + " + test + "\");");
 
 			res.add("\tstartTime = System.currentTimeMillis();");
@@ -164,6 +173,7 @@ public class ToggleClassManager {
 			res.add("\texecutionTime = endTime - startTime;");
 			res.add("\tSystem.out.println(\"Execution time: \" + executionTime);");
 			res.add("\tSystem.out.println(\"" + package_name + ";" + class_name + ";" + test + ";\" + curr_test_res +\";\" + executionTime + \";\" +  curr_test_interactions);");
+			res.add("\tfw.write(\"" + eyeOrSikuli + "-\" + sdf.format(new Date()) + \"-\"+\"" + package_name + ";" + class_name + ";" + test + ";\" + curr_test_res +\";\" + executionTime + \";\" +  curr_test_interactions + \"\\n\");");
 			
 			res.add("\tclearApp(\""+package_name+"\");");
 			res.add("\tThread.sleep(4000);");
@@ -171,6 +181,7 @@ public class ToggleClassManager {
 			res.add("\n\n");
 
 		}
+		res.add("\tfw.close();");
 
 		res.add("\tSystem.out.println(\"Passed tests: \" + tests_ok);");
 		res.add("\tSystem.out.println(\"Failed tests: \" + tests_failed);");
@@ -208,6 +219,9 @@ public class ToggleClassManager {
 
 		res.add("public static void main(String[] args) throws InterruptedException,IOException {");
 		res.add("\n");
+
+		res.add("\tSimpleDateFormat sdf = new SimpleDateFormat(\"yyyy:MM:dd:HH:mm:ss.SSS\");");
+		
 		res.add("\tint tests_ok = 0;");
 		res.add("\tint tests_failed = 0;");
 
@@ -225,7 +239,7 @@ public class ToggleClassManager {
 
 		res.add("\tclearApp(\""+package_name+"\");");
 		res.add("\tThread.sleep(4000);");
-
+		res.add("\tFileWriter fw = new FileWriter(\"results.csv\",true);");
 		for (String test: testNames) {
 
 			res.add("\tSystem.out.println(\"Starting test + " + test + "\");");
@@ -260,12 +274,14 @@ public class ToggleClassManager {
 
 
 			res.add("\tSystem.out.println(\"" + package_name + ";" + class_name + ";" + test + ";\" + curr_test_res +\";\" + executionTime + \";\" +  curr_test_interactions + \";\" + curr_test_eyeautomate_failures);");
+			res.add("\tfw.write(\"EyeAutomate+Sikuli-\" + sdf.format(new Date()) + \"-\"+\"" + package_name + ";" + class_name + ";" + test + ";\" + curr_test_res +\";\" + executionTime + \";\" +  curr_test_interactions + \"\\n\");");
+			
 			res.add("\tclearApp(\""+package_name+"\");");
 			res.add("\tThread.sleep(4000);");
 			res.add("\n\n");
 
 		}
-
+		res.add("\tfw.close();");
 		res.add("\tSystem.out.println(\"Passed tests: \" + tests_ok);");
 		res.add("\tSystem.out.println(\"Failed tests: \" + tests_failed);");
 		res.add("\tSystem.out.println(\"Total Eyeautomate failures: \" + eyeautomate_failures);");
@@ -301,12 +317,13 @@ public class ToggleClassManager {
 
 		res.add("public static void main(String[] args) throws InterruptedException, IOException {");
 		res.add("\n");
+		res.add("\tSimpleDateFormat sdf = new SimpleDateFormat(\"yyyy:MM:dd:HH:mm:ss.SSS\");");
 		res.add("\tint tests_ok = 0;");
 		res.add("\tint tests_failed = 0;");
 
 		res.add("\tint sikuli_failures = 0; //number of fallbacks");
 		res.add("\tint curr_test_interactions = 0;");
-
+		
 		res.add("\tlong startTime = 0;");
 		res.add("\tlong endTime = 0;");
 		res.add("\tlong executionTime = 0;");
@@ -317,7 +334,7 @@ public class ToggleClassManager {
 
 		res.add("\tclearApp(\""+package_name+"\");");
 		res.add("\tThread.sleep(4000);");
-		
+		res.add("\tFileWriter fw = new FileWriter(\"results.csv\",true);");
 		for (String test: testNames) {
 
 			res.add("\tstartTime = System.currentTimeMillis();");
@@ -353,13 +370,15 @@ public class ToggleClassManager {
 
 			res.add("\n\n");
 			res.add("\tSystem.out.println(\"" + package_name + ";" + class_name + ";" + test + ";\" + curr_test_res +\";\" + executionTime + \";\" +  curr_test_interactions + \";\" + curr_test_sikuli_failures);");
+			res.add("\tfw.write(\"Sikuli+EyeAutomate-\" + sdf.format(new Date()) + \"-\"+\"" + package_name + ";" + class_name + ";" + test + ";\" + curr_test_res +\";\" + executionTime + \";\" +  curr_test_interactions + \"\\n\");");
+			
 			res.add("\tclearApp(\""+package_name+"\");");
 			res.add("\tThread.sleep(4000);");
 			
 			res.add("\n\n");
 
 		}
-
+		res.add("\tfw.close();");
 		res.add("\tSystem.out.println(\"Passed tests: \" + tests_ok);");
 		res.add("\tSystem.out.println(\"Failed tests: \" + tests_failed);");
 		res.add("\tSystem.out.println(\"Total Sikuli failures: \" + sikuli_failures);");
@@ -538,9 +557,12 @@ public class ToggleClassManager {
 		eyeautomate_sikuli.add("\n\n\n");
 		sikuli_eyeautomate.add("\n\n\n");
 
-		for (String main_line: this.createEyeAutomateOrSikuliJavaMain()) {
-			eyeautomate_only.add(main_line);
+		for (String main_line: this.createEyeAutomateOrSikuliJavaMain("SikuliJava")) {
 			sikuli_only.add(main_line);
+		}
+		
+		for (String main_line: this.createEyeAutomateOrSikuliJavaMain("EyeAutomateJava")) {
+			eyeautomate_only.add(main_line);
 		}
 		for (String main_line: this.createCombinedMainEyeAutomateFirst()) {
 			eyeautomate_sikuli.add(main_line);
@@ -677,6 +699,7 @@ public class ToggleClassManager {
 	
 	public static void setMainActivity(String maina) {
 		main_activity_name=maina;
+		System.out.println("Main activity settata");
 	}
 	
 }
