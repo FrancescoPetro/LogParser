@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>TOGGLE_logparser</groupId>
 	<artifactId>TOGGLE_logparser</artifactId>
-	<version>0.1.2-SNAPSHOT</version>
+	<version>0.1.3-SNAPSHOT</version>
 	<properties>
 			<github.global.server>github</github.global.server>
 			<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
